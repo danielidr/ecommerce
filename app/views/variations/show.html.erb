@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @variation.size %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @variation.color %>
+</p>
+
+<%= link_to 'Edit', edit_variation_path(@variation) %> |
+<%= link_to 'Back', variations_path %>

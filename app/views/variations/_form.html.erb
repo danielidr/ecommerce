@@ -1,0 +1,27 @@
+<%= form_with(model: variation, local: true) do |form| %>
+  <% if variation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(variation.errors.count, "error") %> prohibited this variation from being saved:</h2>
+
+      <ul>
+      <% variation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.text_field :size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :color %>
+    <%= form.text_field :color %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
