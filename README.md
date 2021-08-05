@@ -1,6 +1,6 @@
 # Diagrama de modelos:
 
-![Models Diagram](https://drive.google.com/file/d/18rjQiJGw0pMsg8xah7jWfh5vOfTLy3x3/view)
+![GitHub Logo](/app/assets/images/Desafio_e-commerce.jpg)
 
 # Crear productos en el catalogo:
 
@@ -23,7 +23,7 @@
 
 ###     Implementar método en el modelo product:
 
-####    Este método busca todas las variantes del producto y si consigue al menos uno con stock lo retorna, si no tiene variantes entonces retorna "The product doesnt have any variants" y si tiene variantes sin stock entonces retorna "Out of stock".
+Este método busca todas las variantes del producto y si consigue al menos uno con stock lo retorna, si no tiene variantes entonces retorna "The product doesnt have any variants" y si tiene variantes sin stock entonces retorna "Out of stock".
 
 ```ruby
     def show_variant
@@ -45,3 +45,29 @@
 ```ruby
     p.show_variant
 ```
+
+# Modelo OrderItem:
+
+Se reemplaza el atributo product_id que hacia referencia a la tabla producto y en su lugar se crea products_variation_id que hace referencia a la tabla products_variation, y en donde a su vez contiene el product_id, para poder mostrar las variantes de los productos en las ordenes y en caso que un cliente quiera cambiar una orden por la talla o el color, saber cual fue el que compró.
+
+```ruby
+class OrderItem < ApplicationRecord
+  belongs_to :products_variation
+  belongs_to :order
+end
+
+class ProductsVariation < ApplicationRecord
+  belongs_to :product
+  belongs_to :variation
+  has_many :order_items
+  has_many :orders, through: :order_items
+end
+
+class Order < ApplicationRecord
+  belongs_to :user
+  has_many :order_items
+  has_many :products_variations, through: :order_items
+  has_many :payments
+end
+```
+
