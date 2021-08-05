@@ -1,6 +1,6 @@
 # Diagrama de modelos:
 
-![Models Diagram](https://drive.google.com/file/d/18rjQiJGw0pMsg8xah7jWfh5vOfTLy3x3/view?usp=sharing)
+![Models Diagram](https://drive.google.com/file/d/18rjQiJGw0pMsg8xah7jWfh5vOfTLy3x3/view)
 
 # Crear productos en el catalogo:
 
@@ -22,6 +22,8 @@
 ## 4.- Para ver una variación del productos o si no hay stock
 
 ###     Implementar método en el modelo product:
+
+####    Este método busca todas las variantes del producto y si consigue al menos uno con stock lo retorna, si no tiene variantes entonces retorna "The product doesnt have any variants" y si tiene variantes sin stock entonces retorna "Out of stock".
 
 ```ruby
     def show_variant
