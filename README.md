@@ -71,3 +71,35 @@ class Order < ApplicationRecord
 end
 ```
 
+# Implementación de cupones:
+
+## Diagrama de modelos:
+
+![GitHub Logo](/app/assets/images/adding_coupons.jpg)
+
+## Relaciones en los modelos:
+
+```ruby
+class Order < ApplicationRecord
+  belongs_to :coupon
+end
+
+class Coupon < ApplicationRecord
+  has_many :orders
+  belongs_to :user
+end
+
+class User < ApplicationRecord
+  has_many :coupons
+end
+```
+
+En redes sociales:
+
+Una orden solo puede utilizar un cupon. Para crear un cupon de redes sociales, se crea en la tabla coupon un registro ingresando en los atributos el porcentaje o monto de descuento y la fecha de vencimiento.
+
+Para clientes específicos:
+
+Un cliente puede tener muchos cupones que le pertenecen. Para crear un cupon de un cliente en especifico, se crea en la tabla coupon un registro, ingresando en los atributos el porcentaje o monto de descuento, la fecha de vencimiento y el id del usuario. Tenemos además el campo used que seria un booleano y nos indicaria si el cliente ya utilizo o no el cupon, estaria como false por defecto.
+
+
