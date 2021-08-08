@@ -43,4 +43,30 @@ class Order < ApplicationRecord
     end
     update_attribute(:total, sum)
   end
+
+  def purchase_preparation(total, remote_ip)
+    price = total * 100
+
+    @response = EXPRESS_GATEWAY.setup_purchase(price,
+      ip: remote_ip,
+      return_url: process_paypal_payment_cart_url,
+      cancel_return_url: root_url,
+      allow_guest_checkout: true,
+      currency: "USD"
+    )
+    @response
+  end
+
+  def payment_creation(token)
+    payment_method = PaymentMethod.find_by(code: "PEC")
+    
+    Payment.create(
+      order_id: self.id,
+      payment_method_id: payment_method.id,
+      state: "processing",
+      total: self.total,
+      token: token
+    )
+  end 
+  
 end
