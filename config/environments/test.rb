@@ -1,3 +1,17 @@
+class Paypal_fake_purchase
+  def success?
+    true
+  end
+
+  def purchase(arg1, arg2)
+      self
+  end
+
+  def setup_purchase(arg1, arg2, arg3, arg4, arg5, arg6)
+    true
+  end
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -43,4 +57,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    ::EXPRESS_GATEWAY = Paypal_fake_purchase.new
+  end
 end
+

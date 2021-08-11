@@ -29,9 +29,9 @@ class Order < ApplicationRecord
   end
 
   def add_product(product_id, quantity)
-    product = Product.find(product_id)
+    product = ProductsVariation.find_by(product_id: product_id)
     if product && (product.stock > 0)
-      order_items.create(product_id: product.id, quantity: quantity, price: product.price)
+      OrderItem.create(order_id: self.id, products_variation_id: product.id, quantity: quantity, price: product.product.price)
       compute_total
     end
   end

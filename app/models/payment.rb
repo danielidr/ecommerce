@@ -20,7 +20,7 @@ class Payment < ApplicationRecord
 
       ActiveRecord::Base.transaction do
         order.save!
-        self.save!
+        save!
       end
     end
   end
