@@ -30,6 +30,7 @@ class Order < ApplicationRecord
 
   def add_product(product_id, quantity)
     product = ProductsVariation.find_by(product_id: product_id)
+
     if product && (product.stock > 0)
       OrderItem.create(order_id: self.id, products_variation_id: product.id, quantity: quantity, price: product.product.price)
       compute_total
@@ -44,7 +45,7 @@ class Order < ApplicationRecord
     update_attribute(:total, sum)
   end
 
-  def purchase_preparation(total, remote_ip)
+  def purchase_preparation(total, remote_ip, process_paypal_payment_cart_url, root_url)
     price = total * 100
 
     @response = EXPRESS_GATEWAY.setup_purchase(price,

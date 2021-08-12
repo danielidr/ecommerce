@@ -52,8 +52,8 @@ class OrderTest < ActiveSupport::TestCase
   test ' check response for purchase_preparation' do
     user = User.create(email: "test@test.com", password: "123456")
     order = Order.create(user_id: user.id)
-    response = order.purchase_preparation(100, "123456")
-    assert response?
+    response = order.purchase_preparation(100, "123456", "paypal.com", "root_url")
+    assert response
   end 
 
 end

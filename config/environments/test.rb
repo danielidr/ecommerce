@@ -7,7 +7,7 @@ class Paypal_fake_purchase
       self
   end
 
-  def setup_purchase(arg1, arg2, arg3, arg4, arg5, arg6)
+  def setup_purchase(arg1, arg2)
     true
   end
 end
@@ -20,6 +20,8 @@ Rails.application.configure do
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
   config.cache_classes = true
+
+  config.root_url = "http://www.example.com"
 
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that

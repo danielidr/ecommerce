@@ -16,7 +16,7 @@ class CartsController < ApplicationController
 
   def pay_with_paypal
     order = Order.find(params[:cart][:order_id])
-    response = order.purchase_preparation(order.response, request.remote_ip)
+    response = order.purchase_preparation(order.response, request.remote_ip, 'process_paypal_payment_cart_url', 'root_url')
     order.payment_creation(response.token)
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
